@@ -1,1 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Alert</title>
+    <style>
+        /* General Setup */
+        :root {
+            --primary: #007bff;
+            --danger: #dc3545;
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
 
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* SECTION 1: THE SCARE (Overlay) */
+        #scare-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: var(--danger);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            text-align: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .pulse {
+            animation: pulse-animation 0.5s infinite;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hacked-text {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* SECTION 2-5: EDUCATIONAL CONTENT */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0; /* Hidden initially */
+            animation: fade-in 1s forwards;
+            animation-delay: 2.7s; /* Waits for scare to finish */
+        }
+
+        @keyframes fade-in {
+            to { opacity: 1; }
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            color: var(--dark);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 40px;
+            padding-bottom: 20px;
+            font-style: italic;
+        }
+
+        .highlight {
+            background-color: #ffefc1;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        /* Utility to hide scare screen */
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="scare-screen">
+        <div class="pulse">🚨</div>
+        <div class="hacked-text">YOU'VE BEEN<br>HACKED</div>
+        <p style="color: white; margin-top: 20px;">Uploading Data... 99%</p>
+    </div>
+
+    <div class="container">
+        <h1>Just Kidding.</h1>
+        <p class="subtitle">But this is exactly how attacks start.</p>
+
+        <div class="card">
+            <h2>Why did you scan this?</h2>
+            <p>You scanned an unlabelled QR code just to see what it was. This is known as <strong>"Quishing"</strong> (QR Code Phishing).</p>
+            <p>If this were a real attack, that loading screen could have been installing malware or stealing your login credentials.</p>
+        </div>
+
+        <div class="card">
+            <h2>It happens in real life</h2>
+            <p>Attackers paste malicious stickers over real QR codes on:</p>
+            <ul>
+                <li>Restaurant Menus</li>
+                <li>Parking Meters</li>
+                <li>Posters & Flyers</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-left: 5px solid var(--primary);">
+            <h2>🛡️ How to stay safe</h2>
+            <ul>
+                <li><strong>Check the URL:</strong> Before clicking "Go", look at the link preview. Does it look suspicious?</li>
+                <li><strong>Don't trust blindly:</strong> Be wary of codes in public places that look like stickers pasted over something else.</li>
+                <li><strong>Beware of Urgency:</strong> If a page says "PAY NOW" or "VIRUS DETECTED," close it immediately.</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>This board was created by your Residence Don to promote cybersecurity awareness.<br>Stay safe online!</p>
+        </div>
+    </div>
+
+    <script>
+        // Logic to handle the scare transition
+        window.addEventListener('load', () => {
+            const scareScreen = document.getElementById('scare-screen');
+            
+            // Wait 2.5 seconds, then fade out the scare screen
+            setTimeout(() => {
+                scareScreen.classList.add('hidden');
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
